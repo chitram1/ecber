@@ -63,7 +63,7 @@ library(roxygen2)
 #' @param autonomy_behavior_types list of autonomy behavior types
 #' @param missing_threshold default missing threshold value
 #' @return dataframe of all of the entropy outputs for different subsets of the data
-Combined_entropy_output <- function(file_name,
+combined_entropy_output <- function(file_name,
                                     tactile_padding = 1.0,
                                     auditory_padding = 1.0,
                                     TAV_behavior_types = list("mom_auditory_types" = c('Vocal'),
