@@ -2772,6 +2772,8 @@ Boris2NoldusFileReShape <- function(rel){
 
 #Function which reads in csv directory and in the same one creates a new folder to contain the translated excel files
 ConvertCSVtoEXCEL <- function(csv_dir) {
+  library(tidyr)
+  library(tidyverse)
   setwd(path.expand(csv_dir))
   data_frame_names <- list.files(pattern = "*.csv", recursive = T) #accesses all files in subdirectories if recursive = T
   data_frame_list <- lapply(data_frame_names, read.csv) #reads in all csv files
