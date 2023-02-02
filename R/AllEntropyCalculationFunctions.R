@@ -63,10 +63,6 @@ library(roxygen2)
 #' @param autonomy_behavior_types list of autonomy behavior types
 #' @param missing_threshold default missing threshold value
 #' @return dataframe of all of the entropy outputs for different subsets of the data
-#' @examples
-#' t_mat <- matrix(c(0.3, 0.7, 0.6, 0.4), 2,2, T)
-#' sim_mc <- SimulateMarkovChain(t_mat)
-#' sim_mc <- SimulateMarkovChain(t_mat, n_sims = 500)
 Combined_entropy_output <- function(file_name,
                                     tactile_padding = 1.0,
                                     auditory_padding = 1.0,
