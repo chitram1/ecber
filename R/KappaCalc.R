@@ -47,7 +47,8 @@ calcKappaValues <- function(excelfilepath){
   kappaUnweightedStdError = Kappa(matrixVals)$Unweighted[2]
   names(kappaUnweightedStdError) = "kappaUnweightedStdError"
   kappaVals = cbind(kappaVals, weightedKappa, kappaUnweightedStdError, kappaWeightedStdError)
-  return(kappaVals)
+  individKappas = individualCodeKappas(matrixVals, total)
+  return(list(kappaVals, individKappas))
 }
 
 calcCohensKappa <- function(mat, total){
@@ -73,6 +74,27 @@ calcCohensKappa <- function(mat, total){
   return(resultsdf)
 }
                                                                                                                #this function will take in the K events which were coded for
-individualCodeKappas <- function(K_events) {
-
+individualCodeKappas <- function(mat, total) {
+  #the matrix will have the totals removed from it
+  cS <- colSums(mat)
+  rS <- rowSums(mat)
+  events <- row.names(mat)
+  ind_vals <- rep(0, length(events))
+  for (i in 1:length(events)) {
+    shared_val <- mat[i, i]
+    mini_mat <- matrix(c(shared_val,
+                         rS[i] - shared_val,
+                         cS[i] - shared_val,
+                         total - (shared_val +
+                                    rS[i] - shared_val +
+                                    cS[i] - shared_val)),
+                       nrow = 2, ncol = 2, byrow = TRUE)
+    ind_val <- calcCohensKappa(mini_mat, total)$CohensOmnibusKappa
+    ind_vals[i] <- ind_val
+  }
+  final_res <- t(data.frame(ind_vals))
+  colnames(final_res) <- events
+  rownames(final_res) <- c("Ind. Kappa Values")
+  final_res[is.nan(final_res)] <- 0
+  return(final_res)
 }
