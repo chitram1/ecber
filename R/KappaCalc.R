@@ -78,7 +78,7 @@ individualCodeKappas <- function(mat, total) {
   #the matrix will have the totals removed from it
   cS <- colSums(mat)
   rS <- rowSums(mat)
-  events <- row.names(mat)
+  events <- colnames(mat)
   ind_vals <- rep(0, length(events))
   for (i in 1:length(events)) {
     shared_val <- mat[i, i]
