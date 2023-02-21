@@ -3,8 +3,13 @@
 
 #add individual kappa values
 if ("vcd" %in% rownames(installed.packages()) == FALSE) {
-  install.packages("cvd")
+  install.packages("vcd")
 }
+
+if ("writexl" %in% rownames(installed.packages()) == FALSE) {
+  install.packages("writexl")
+}
+
 library(writexl)
 library("vcd")
 wd = getwd()
