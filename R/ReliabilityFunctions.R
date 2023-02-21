@@ -490,7 +490,7 @@ for (i in 1:nrow(comparisonDf_file2_sorted)){
 
 }
 
-createToleranceMatrix <- function(filepath1, filepath2, tolerance, file_seconds = 300) {
+createToleranceMatrix <- function(filepath1, filepath2, eventlist, tolerance, file_seconds = 300) {
   #if (tolerance == 1) {
     #output <- buildMatrix(filepath1, filepath2, eventlist, tolerance, file_seconds)
     #return(output[1])
