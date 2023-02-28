@@ -1,4 +1,3 @@
-### ========== user-defined functions ===================
 formatData <- function(filepath,events,file_seconds=600){
 
 	#Reformat into stop/start
@@ -826,7 +825,7 @@ add_tolerance_per_event <- function(valsindffnotdff2, dff2, timechange_event, cu
 }
 
 createToleranceMatrix <- function(filepath1,filepath2,eventlist,tolerance,file_seconds=300) {
-  cur_confusion_mat = buildMatrix(filepath1, filepath2, eventlist, tolerance, file_seconds)
+  cur_confusion_mat = buildMatrix(filepath1, filepath2, eventlist, file_seconds)
   cur_confusion_matrix = cur_confusion_mat$confusion_matrix #original matrix which we will change
   if (tolerance == 0){
     return(cur_confusion_mat)
