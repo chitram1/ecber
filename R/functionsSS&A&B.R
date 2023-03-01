@@ -843,7 +843,10 @@ createToleranceMatrix <- function(filepath1,filepath2,eventlist,tolerance,file_s
     #by utilizing set difference
     valsindffnotdff2 <- setdiff(dffdropped, dff2dropped) #all of the values in dff1 which are not in dff2
     #order alphabetically by behavior
-    valsindffnotdff2 <- valsindffnotdff2[order(valsindffnotdff2$behavior),]
+    indices <- order(valsindffnotdff2$behavior)
+    print(length(indices))
+    print(nrow(valsindffnotdff2))
+    valsindffnotdff2 <- valsindffnotdff2[indices,]
     valsindffnotdff2 <- valsindffnotdff2[which(valsindffnotdff2$behavior != 'data_missing'),]
     diffs <- data.frame(diff(valsindffnotdff2$time)) #length will be - 1 since we are finding difference
     colnames(diffs) = "diff"
