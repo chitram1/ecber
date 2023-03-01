@@ -842,7 +842,7 @@ createToleranceMatrix <- function(filepath1,filepath2,eventlist,tolerance,file_s
     dff2dropped <- dff2[ , 1:2]
     #before we make a table with the frequencies, we will convert the values within seconds to the same value
     #by utilizing set difference
-    valsindffnotdff2 <- setdiff(dffdropped, dff2dropped) #all of the values in dff1 which are not in dff2
+    valsindffnotdff2 <- dplyr::setdiff(dffdropped, dff2dropped) #all of the values in dff1 which are not in dff2
     print(nrow(dffdropped))
     print(nrow(valsindffnotdff2))
     #order alphabetically by behavior
