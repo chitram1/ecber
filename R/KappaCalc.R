@@ -46,10 +46,10 @@ calcKappaValues <- function(excelfilepath){
   #Calculating Cohen's kappa
   kappaVals <- calcCohensKappa(matrixVals, total)
   row.names(kappaVals)[1] = "name"
-  weightedKappa = Kappa(matrixVals)$Weighted['value'] #grab the weighted Kappa values
-  kappaWeightedStdError = Kappa(matrixVals)$Weighted[2]
+  weightedKappa = vcd::Kappa(matrixVals)$Weighted['value'] #grab the weighted Kappa values
+  kappaWeightedStdError = vcd::Kappa(matrixVals)$Weighted[2]
   names(kappaWeightedStdError) = "kappaWeightedStdError"
-  kappaUnweightedStdError = Kappa(matrixVals)$Unweighted[2]
+  kappaUnweightedStdError = vcd::Kappa(matrixVals)$Unweighted[2]
   names(kappaUnweightedStdError) = "kappaUnweightedStdError"
   kappaVals = cbind(kappaVals, weightedKappa, kappaUnweightedStdError, kappaWeightedStdError)
   individKappas = individualCodeKappas(matrixVals, total)
