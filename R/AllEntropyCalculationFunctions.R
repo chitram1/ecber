@@ -121,7 +121,7 @@ combined_entropy_output <- function(file_name,
 }
 
 #'This function goes through an entire directory and finds the combined entropy output for each file
-combined_entropy_output_dir <- function(dir_loc, log_file = paste(Sys.Date(), '-ber-logfile.txt', sep='')){
+combined_entropy_output_dir <- function(dir_loc, log_file = paste(Sys.Date(), '-ber-logfile.txt', sep=''), missing_threshold = 0.1){
   old_dir <- getwd()
   setwd(path.expand(dir_loc))
 
@@ -145,10 +145,10 @@ combined_entropy_output_dir <- function(dir_loc, log_file = paste(Sys.Date(), '-
   files_to_check <- c()
   for (i in 1:n_files){
     individual_file <- all_files[i]
-    capture.output(file_results <- combined_entropy_output(individual_file), file=NULL)
+    capture.output(file_results <- combined_entropy_output(individual_file, missing_threshold = missing_threshold), file=NULL)
     if(file_results$file_checks){
       files_to_check <- c(files_to_check, tail(strsplit(individual_file, '/')[[1]], 1))
-      capture.output(file_results <- combined_entropy_output(individual_file),
+      capture.output(file_results <- combined_entropy_output(individual_file, missing_threshold = missing_threshold),
                      file = log_file, append = T)
       resultsDF[i,] <- file_results$estimates
       message(paste('Warning - See log for file : ', tail(strsplit(individual_file, '/')[[1]], 1)))
