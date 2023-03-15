@@ -40,7 +40,7 @@ Boris2NoldusFileReShape <- function(rel){
   # Time_Relative_sf,	Duration_sf,	Observation,	Behavior,	Event_Type
   names(rel)
   
-  rel.2 <- rel %>% select(Observation = Observation.id,
+  rel.2 <- rel %>% dplyr::select(Observation = Observation.id,
                           start = Start..s.,
                           stop = Stop..s.,
                           Duration_sf = Duration..s.,
@@ -78,8 +78,8 @@ Boris2NoldusFileReShape <- function(rel){
   
   # Remove our temp columns to tidy up the data and re-order the columns so they match
   # Time_Relative_sf	Duration_sf	Observation	Event_Log	Behavior	Event_Type
-  rel.5 <- rel.4 %>% select(-Behavior.type, Event_Type_tempName, Event_Type_tempName2) %>%
-    select(Time_Relative_sf, Duration_sf, Observation,	Behavior,	Event_Type,Behavioral.category) %>%
+  rel.5 <- rel.4 %>% dplyr::select(-Behavior.type, Event_Type_tempName, Event_Type_tempName2) %>%
+    dplyr::select(Time_Relative_sf, Duration_sf, Observation,	Behavior,	Event_Type,Behavioral.category) %>%
     mutate(Duration_sf = ifelse(is.na(Duration_sf),0, Duration_sf)) %>%
     mutate(Duration_sf = ifelse(Event_Type == "State stop",0, Duration_sf))
   
@@ -88,7 +88,7 @@ Boris2NoldusFileReShape <- function(rel){
   sessionStartTime <- rel.5 %>% filter(Behavioral.category== "Test behavior")
   timeVariable <- min(sessionStartTime$Time_Relative_sf)
   rel.5$Time_Relative_sf <- rel.5$Time_Relative_sf - timeVariable
-  rel.5 <- rel.5 %>% select(-Behavioral.category)
+  rel.5 <- rel.5 %>% dplyr::select(-Behavioral.category)
   rel.5 <- rel.5[order(rel.5$Time_Relative_sf),]
   rel.6 <- rel.5 %>%  mutate(Time_Relative_sf = ifelse(Time_Relative_sf < 0,0, Time_Relative_sf)) %>%
     mutate(Time_Relative_sf = ifelse(Time_Relative_sf >= 600,599.999, Time_Relative_sf))
