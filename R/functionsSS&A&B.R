@@ -628,3 +628,67 @@ createReliabilityExcel <- function(save_dir, filename1, filename2, eventlist, to
   #now f_names contains all of the pairwise names that we care about 
 }
 
+createToleranceMatrix2 <- function (filepath1, filepath2, eventlist, tolerance, file_seconds = 300) 
+{
+  cur_confusion_mat = buildMatrix(filepath1, filepath2, eventlist, 
+                                  file_seconds)
+  cur_confusion_matrix = cur_confusion_mat$confusion_matrix
+  if (tolerance == 0) {
+    return(cur_confusion_mat)
+  }
+  row_names = rownames(cur_confusion_matrix)
+  col_names = colnames(cur_confusion_matrix)
+  for (events in eventlist) {
+    dff <- formatData(filepath1, events, file_seconds)
+    dff2 <- formatData(filepath2, events, file_seconds)
+    dffdropped <- dff[, 1:2]
+    dff2dropped <- dff2[, 1:2]
+    valsindffnotdff2 <- dplyr::setdiff(dffdropped, dff2dropped)
+    inds <- order(valsindffnotdff2$behavior)
+    valsindffnotdff2 <- valsindffnotdff2[inds, ]
+    valsindffnotdff2 <- valsindffnotdff2[which(valsindffnotdff2$behavior != 
+                                                 "data_missing"), ]
+    diffs <- data.frame(diff(valsindffnotdff2$time))
+    colnames(diffs) = "diff"
+    diffs = rbind(c(diff = 0), diffs)
+    diffs$diff <- round(diffs$diff, 2)
+    diffs$diff <- diffs$diff * 100
+    valsindffnotdff2 = cbind(valsindffnotdff2, diffs)
+    rownames(valsindffnotdff2) = c(1:nrow(valsindffnotdff2))
+    time_change = data.frame(valsindffnotdff2[which(valsindffnotdff2$diff > 
+                                                      1), ])
+    list_of_timechange_dataframes = list()
+    for (i in 1:length(events)) {
+      inds = which(time_change$behavior == events[i])
+      mini_df <- data.frame(time_change[inds, ])
+      list_of_timechange_dataframes[[i]] = mini_df
+    }
+    for (i in 1:length(list_of_timechange_dataframes)) {
+      dflist = list_of_timechange_dataframes[[i]]
+      cur_confusion_matrix = add_tolerance_per_event(valsindffnotdff2, 
+                                                     dff2, dflist, cur_confusion_matrix)
+    }
+  }
+  return(cur_confusion_matrix)
+  
+  cur_confusion_matrix = cur_confusion_matrix[1:nrow(cur_confusion_matrix) - 
+                                                1, 1:ncol(cur_confusion_matrix) - 1]
+  sr <- as.integer(sum(rowSums(cur_confusion_matrix, na.rm = T)) + 
+                     1e-06)
+  sc <- as.integer(sum(colSums(cur_confusion_matrix, na.rm = T)) + 
+                     1e-06)
+  if (sr != sc) {
+    print("sums not equal")
+  }
+  agree <- sum(diag(cur_confusion_matrix), na.rm = T)
+  tot <- sr
+  perc_agree <- agree/tot * 100
+  cur_confusion_matrix = rbind(cur_confusion_matrix, colSums(cur_confusion_matrix))
+  cur_confusion_matrix = cbind(cur_confusion_matrix, rowSums(cur_confusion_matrix))
+  rowname <- paste0(dff2$observer[1], "_totals")
+  colname <- paste0(dff$observer[1], "_totals")
+  rownames(cur_confusion_matrix)[nrow(cur_confusion_matrix)] <- rowname
+  colnames(cur_confusion_matrix)[ncol(cur_confusion_matrix)] <- colname
+  return(list(confusion_matrix = cur_confusion_matrix, percent_agreement_raw = perc_agree))
+}
+
