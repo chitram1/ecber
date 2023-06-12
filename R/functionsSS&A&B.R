@@ -669,7 +669,6 @@ createToleranceMatrix2 <- function (filepath1, filepath2, eventlist, tolerance, 
                                                      dff2, dflist, cur_confusion_matrix)
     }
   }
-  return(cur_confusion_matrix)
   
   cur_confusion_matrix = cur_confusion_matrix[1:nrow(cur_confusion_matrix) - 
                                                 1, 1:ncol(cur_confusion_matrix) - 1]
