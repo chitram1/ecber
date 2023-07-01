@@ -10,22 +10,26 @@ if ("writexl" %in% rownames(installed.packages()) == FALSE) {
   install.packages("writexl")
 }
 
+if ("readxl" %in% rownames(installed.packages()) == FALSE) {
+  install.packages("readxl")
+}
+
 library(writexl)
 library("vcd")
+library(readxl)
 wd = getwd()
 
-createPracticeExcel <- function(dimr=5, dimc=5){
+createPracticeExcel <- function(dimr=5, dimc=5, wd = getwd()){
   df <- data.frame(A = c(19, 2, 1, 4, 1),
                    B = c(0, 20, 5, 2, 3),
                    C = c(1, 2, 11, 3, 0),
                    D = c(2, 1, 2, 18, 2),
                    E = c(0, 3, 2, 1, 15))
   rownames(df) = c("A", "B", "C", "D", "E")
-  wd = getwd()
   write_xlsx(df, paste0(wd, '/', 'practicekappa.xlsx'))
 }
 
-createPracticeExcel2 <- function(dimr=4, dimc=4){
+createPracticeExcel2 <- function(dimr=4, dimc=4m, wd = getwd()){
   df <- data.frame(A = c(56, 115, 0, 0),
                    B = c(4, 121, 0, 0),
                    C = c(0, 4, 0, 0),
@@ -57,7 +61,10 @@ calcKappaValues <- function(excelfilepath){
   return(list(kappaVals, individKappas))
 }
 
-calcCohensKappa <- function(mat, total){
+calcCohensKappa <- function(mat, total = 0){
+  if (total == 0){
+    total = sum(rowSums(mat))
+  }
   prob_mat <- mat / total
   nr <- nrow(mat)
   nc <- ncol(mat)
