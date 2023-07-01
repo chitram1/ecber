@@ -29,7 +29,7 @@ createPracticeExcel <- function(dimr=5, dimc=5, wd = getwd()){
   write_xlsx(df, paste0(wd, '/', 'practicekappa.xlsx'))
 }
 
-createPracticeExcel2 <- function(dimr=4, dimc=4m, wd = getwd()){
+createPracticeExcel2 <- function(dimr=4, dimc=4, wd = getwd()){
   df <- data.frame(A = c(56, 115, 0, 0),
                    B = c(4, 121, 0, 0),
                    C = c(0, 4, 0, 0),
