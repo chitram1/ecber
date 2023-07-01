@@ -104,7 +104,7 @@ formatData <- function(filepath,events,file_seconds=600){
 }
 
 buildMatrix <- function(filepath1,filepath2,eventlist,file_seconds=600){
-  
+  library(dplyr)
   #Set up matrix of all events in eventlist for confusion matrix
   matvals <- c(unlist(eventlist),"data_missing")
   mat <- matrix(data=NA, nrow=length(matvals), ncol=length(matvals))
