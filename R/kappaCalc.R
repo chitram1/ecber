@@ -21,6 +21,7 @@ createPracticeExcel <- function(dimr=5, dimc=5){
                    D = c(2, 1, 2, 18, 2),
                    E = c(0, 3, 2, 1, 15))
   rownames(df) = c("A", "B", "C", "D", "E")
+  wd = getwd()
   write_xlsx(df, paste0(wd, '/', 'practicekappa.xlsx'))
 }
 
