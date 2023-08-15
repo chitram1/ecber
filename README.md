@@ -190,6 +190,10 @@ Observation Coding Tools
 
 Our package includes functions for comparing 2 coders and finding the similarity in their reports. We include options to increase the tolerance for similarity with a 1, 2, or n-second buffer between both code reports. This allows us to compare reports without having agreement requirements which are too strict. We find the percent agreement by creating a confusion matrix with all the included events that we are looking for, and each entry in the matrix is the amount of seconds that both coders agreed for that pair of events.
 
+Relevant functions we will be using for calculating reliability values include:
+1. `createToleranceMatrix(filepath1, filepath2, eventlist, tolerance = 0, file_seconds = 300)`
+
+
 ```
 eventlist <- list(
   c("LookAtMomActivity","NotLookAtMomActivity","CantTellLooking"),
