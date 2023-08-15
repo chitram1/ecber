@@ -55,10 +55,18 @@ Although the necessary packages are installed within the R files written for thi
 Example: Working With an Input File
 ------------------
 
-ecber requires a certain form of Input File in order to use the functions and get the expected output. The input file comes from BORIS which outputs a CSV file. 
+ecber requires a certain form of Input File in order to use the functions and get the expected output. The input file comes from BORIS which outputs a CSV file. Included below are the first few lines of a CSV file from BORIS. Using the ConvertCSVtoEXCEL function, we convert this input file into the expected excel format.
+
+```
+Observation id,Observation date,Description,Media file,Total length,FPS,Start time,Stop time,Duration,Test status,Subject,Behavior,Behavioral category,Modifiers,Behavior type,Start (s),Stop (s),Duration (s),Comment start,Comment stop
+6008BECNR,2021-12-06 13:26:24,,T:/Unpredictability Video Coding Project/Montreal Videos/6008.mp4,1381.010,29.97,2000-01-01T00:00:00,2000-01-01T00:00:00,,,No focal subject,NotHoldingBaby,Mom Holding,,STATE,689.000,989.023,300.023,,
+6008BECNR,2021-12-06 13:26:24,,T:/Unpredictability Video Coding Project/Montreal Videos/6008.mp4,1381.010,29.97,2000-01-01T00:00:00,2000-01-01T00:00:00,,,No focal subject,NoObjectInHand,Mom Manipulation,,STATE,689.000,750.421,61.421,,
+```
+
 
 Calculating Entropy Rate
 ------------------
+
 
 Observation Coding Tools
 ------------------
