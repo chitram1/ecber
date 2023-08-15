@@ -68,7 +68,7 @@ There can be many different column names, but the required ones for the conversi
 The output of the CSV conversion function will be in a new directory called ConvertedToExcels. An example of what the excel file looks like is shown below. This excel file is also included in the test files folder: 6008BECNR.xlsx
 
 ```
-Time_Relative_sf	Duration_sf	Observation	Behavior	Event_Type	
+Time_Relative_sf Duration_sf Observation Behavior Event_Type	
 0	300.023	6008BECNR	NotHoldingBaby	State start	
 0	61.421	6008BECNR	NoObjectInHand	State start	
 0	60.798	6008BECNR	NotLookAtMomActivity	State start	
