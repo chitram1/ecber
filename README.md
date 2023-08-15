@@ -55,7 +55,7 @@ Although the necessary packages are installed within the R files written for thi
 Example: Working With an Input File
 ------------------
 
-ecber requires a certain form of Input File in order to use the functions and get the expected output. The input file comes from BORIS which outputs a CSV file. Included below are the first few lines of a CSV file from BORIS. Using the ConvertCSVtoEXCEL function, we convert this input file into the expected excel format.
+ecber requires a certain form of Input File in order to use the functions and get the expected output. The input file comes from BORIS which outputs a CSV file. Included below are the first few lines of a CSV file from BORIS. Using the `ConvertCSVtoEXCEL` function, we convert this input file into the expected excel format. This file is also included in the test files folder: 6008BECNR.csv
 
 ```
 Observation id,Observation date,Description,Media file,Total length,FPS,Start time,Stop time,Duration,Test status,Subject,Behavior,Behavioral category,Modifiers,Behavior type,Start (s),Stop (s),Duration (s),Comment start,Comment stop
@@ -63,7 +63,18 @@ Observation id,Observation date,Description,Media file,Total length,FPS,Start ti
 6008BECNR,2021-12-06 13:26:24,,T:/Unpredictability Video Coding Project/Montreal Videos/6008.mp4,1381.010,29.97,2000-01-01T00:00:00,2000-01-01T00:00:00,,,No focal subject,NoObjectInHand,Mom Manipulation,,STATE,689.000,750.421,61.421,,
 ```
 
+There can be many different column names, but the required ones for the conversion function include Observation.id, Start..s., Stop..s., Duration..s., Behavioral.category, Behavior, Behavior.type.
 
+The output of the CSV conversion function will be in a new directory called ConvertedToExcels. An example of what the excel file looks like is shown below. This excel file is also included in the test files folder: 6008BECNR.xlsx
+
+```
+Time_Relative_sf	Duration_sf	Observation	Behavior	Event_Type	
+0	300.023	6008BECNR	NotHoldingBaby	State start	
+0	61.421	6008BECNR	NoObjectInHand	State start	
+0	60.798	6008BECNR	NotLookAtMomActivity	State start	
+0	0	6008BECNR	Start	State point	
+0	3.419	6008BECNR	positive	State start	
+```
 Calculating Entropy Rate
 ------------------
 
