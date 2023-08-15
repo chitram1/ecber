@@ -83,6 +83,45 @@ All of the functions for calculating entropy, reliability, and kappa values take
 Calculating Entropy Rate
 ------------------
 
+The function `ber_analyze_file` calculates the entropy rate from an input excel file which has gone through the file conversion function described in the previous section. For in depth detail about the parameters and output of this function, please refer to ccber's SDD folder and their README file. 
+
+Our package expands upon this function by incorporating new behavior signals which include Affect and Autonomy Granting, each of which containing actions/behaviors that fall within this category. We have additional functions to include affect and autonomy granting: `ber_analyze_file_affect`, `ber_analyze_file_affect_and_autonomy`.
+
+Originally, we have 3 sensory signals: Tactile, Auditory, and Visual. We have added affect and autonomy granting.
+
+For Affect, we have the following sensory signals:
+1. Positive
+2. Negative
+3. Neutral
+
+For Autonomy Granting, we have the following sensory signals:
+1. Autonomy Support
+2. Intrusiveness
+3. Neither
+
+These functions behave in the same manner as `ber_analyze_file` except that they take in addional behavior types which we will use to create new co-occurrence states. 
+
+```
+ber_analyze_file('6008BECNR.xlsx') -->
+
+SubjectID CanEstimateEntropy EntropyRate CombinedVideoDuration PercentMissing
+6008BECNR              FALSE         NA                 300.126     0.1228284
+```
+In the above example, the percent missing threshold is higher than the default missing value of 0.1 so we are unable to calculate the entropy rate for the file.
+
+```
+ber_analyze_file('6008BECNR.xlsx', missing_threshold = 0.15) -->
+
+SubjectID CanEstimateEntropy EntropyRate TotalNumberOfTransitions
+6008BECNR               TRUE   0.4789043                      194
+```
+
+Now that we have increased the missing threshold to a value greater than the percent missing in the file, showing the first few columns of output, we see that we are now able to estimate the entropy value.
+
+```
+ber_analyze_file_affect('6008BECNR.xlsx', missing_threshold = 0.15)
+```
+Now that we have included affect as a sensory signal and are finding all possible combinations of states including the total count, total time, and average time for each of these collections, the final output of these functions will be a data frame of 1 row and 96 columns. 
 
 Observation Coding Tools
 ------------------
