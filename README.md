@@ -25,6 +25,7 @@ ecber's package additions:
 -   increased tolerance of 1+ seconds between events when calculating reliability of two different coder files
 -   kappa value correlation calculation functions
 -   conversion functions for individual files and directories from BORIS file format to excel files
+-   option to increase markov matrix lag (markov model order) when calculating entropy; this increases the number of previous states that are used for the new state prediction
 
 Installation Instructions
 ------------------
@@ -85,7 +86,23 @@ All of the functions for calculating entropy, reliability, and kappa values take
 Calculating Entropy Rate
 ------------------
 
-The function `ber_analyze_file` calculates the entropy rate from an input excel file which has gone through the file conversion function described in the previous section. For in depth detail about the parameters and output of this function, please refer to ccber's SDD folder and their README file. 
+The function `ber_analyze_file` calculates the entropy rate from an input excel file which has gone through the file conversion function described in the previous section. For additional in-depth detail about the parameters and output of this function, please refer to ccber's SDD folder and their README file. 
+
+- `f_loc` file location
+- `plot_all` logical: Plot the data to observe the sequence of behaviors
+- `plots_to_file` logical: send all plots to a file
+- `tactile_padding` right padding adjustment to tactile events
+- `auditory_padding` right padding adjustment to auditory events
+- `behavior_types` dictionary of behavior types.  The required sections will depend on the type of entropy function this is. For example, if we are just using the following 3 sensory signals (tactile, auditory, and visual), the following are required: mom_auditory_types, mom_tactile_types, mom_visual_types, baby_visual_types, missing_types
+- `missing_threshold` proportion of acceptable missing time
+- `order` markov model order value for how many states we go back in order to predict the subsequent state. This value always defaults to 1, and this means that each subsequent state depends directly on the preceding state.
+
+```
+ber_analyze_file('6008BECNR_t.xlsx', missing_threshold = 0.15, order = 1) --> The entropy is 0.4789043
+ber_analyze_file('6008BECNR_t.xlsx', missing_threshold = 0.15, order = 2) --> The entropy is 0.4499737
+ber_analyze_file('6008BECNR_t.xlsx', missing_threshold = 0.15, order = 2) --> The entropy is 0.4348698
+```
+As the order parameter increases, the entropy value decreases. This is because we have a larger gap between the states for predicting future states in the markov model and we lose information.
 
 Our package expands upon this function by incorporating new behavior signals which include Affect and Autonomy Granting, each of which containing actions/behaviors that fall within this category. We have additional functions to include affect and autonomy granting: `ber_analyze_file_affect`, `ber_analyze_file_affect_and_autonomy`.
 
@@ -170,6 +187,25 @@ The parameters required by these plotting functions are largely intermediate cal
 
 Observation Coding Tools
 ------------------
+
+Our package includes functions for comparing 2 coders and finding the similarity in their reports. We include options to increase the tolerance for similarity with a 1, 2, or n-second buffer between both code reports. This allows us to compare reports without having agreement requirements which are too strict. We find the percent agreement by creating a confusion matrix with all the included events that we are looking for, and each entry in the matrix is the amount of seconds that both coders agreed for that pair of events.
+
+```
+eventlist <- list(
+  c("LookAtMomActivity","NotLookAtMomActivity","CantTellLooking"),
+  c("positive","neutral","negative","CantTellAffect"),
+  c("AutonomySupport","Neither","Intrusiveness","CantTellBehavior")
+)
+
+tolerance_0 = createToleranceMatrix(filepath1 = '6008BECEU_t.xlsx', filepath2 = '6008BECNR_t.xlsx', eventlist = eventlist, tolerance = 0, file_seconds = 300)
+
+tolerance_1 = createToleranceMatrix(filepath1 = '6008BECEU_t.xlsx', filepath2 = '6008BECNR_t.xlsx', eventlist = eventlist, tolerance = 1, file_seconds = 300)
+
+#tolerance_0$percent_agreement_raw is equal to 89.23582
+#tolerance_1$percent_agreement_raw is equal to 93.93792
+```
+
+As the tolerance increases, the percent agreement increases since we are more lenient in what we consider to be equal recorded codes. When the tolerance is 0 (the default value for the tolerance parameter), both coders need to have recorded the exact same signal at the exact same time. If the codes are off by 1 second, they won't be recorded unless we use a tolerance of 1.
 
 Integrating BORIS with ecber
 ------------------
