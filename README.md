@@ -23,13 +23,39 @@ ecber's package additions:
 -   new plotting functions to display additional pairwise counts
 -   reliability functions which calculate the duration agreement between coders for sensory signal codes
 -   increased tolerance of 1+ seconds between events when calculating reliability of two different coder files
--   kappa value correlation calculation functions 
+-   kappa value correlation calculation functions
+-   conversion functions for individual files and directories from BORIS file format to excel files
 
 Installation Instructions
 ------------------
 
+The installation instructions for this package are similar to those of ccber. You will need `devtools` in order to install this package from the Github Repo.
+
+```{r, echo=TRUE, eval=FALSE}
+install.packages('devtools', dependencies = TRUE)
+```
+
+```{r, echo=TRUE, eval=FALSE}
+devtools::install_github('chitram/ecber')
+```
+Now that the package has been installed, we need to load it in with the library() function.
+
+```{r, echo=TRUE, eval=TRUE}
+library('ecber')
+```
+
+Although the necessary packages are installed within the R files written for this package, if you get errors when using the functions, they may be because some packages need to be loaded in again. If this is the case, please install the following packages as a precaution:
+1. tidyr
+2. dplyr
+3. vcd
+4. readxl
+5. writexl
+6. tidyverse
+    
 Example: Working With an Input File
 ------------------
+
+ecber requires a certain form of Input File in order to use the functions and get the expected output. The input file comes from BORIS which outputs a CSV file. 
 
 Calculating Entropy Rate
 ------------------
