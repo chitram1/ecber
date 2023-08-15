@@ -76,7 +76,9 @@ Time_Relative_sf Duration_sf Observation Behavior Event_Type
 0	3.419	6008BECNR	positive	State start	
 ```
 
-The observation ID is the name of the file with the encodings -- in the above case, the observation id is 6008BECNR. The Start..s. stands for the starting time, and Stop..s. stands for the stopping time, both of which are in seconds. The Duration..s. is the duration of seconds between the start and stop time. Behavioral.category and Behavior will be one of the event code states. Lastly, Behavior.type indicates whether or not it is a point or state event.
+- The observation ID is the name of the file with the encodings -- in the above case, the observation id is 6008BECNR. - The Start..s. stands for the starting time, and Stop..s. stands for the stopping time, both of which are in seconds. - The Duration..s. is the duration of seconds between the start and stop time.
+- Behavioral.category and Behavior will be one of the event code states.
+- Behavior.type indicates whether or not it is a point or state event.
 
 All of the functions for calculating entropy, reliability, and kappa values take in excel files as formatted above.
 
@@ -155,6 +157,16 @@ You can call all of these functions while finding the entropy in the ber_analyze
 ber_analyze_file_affect('6008BECNR.xlsx', missing_threshold = 0.15, plots_to_file = T)
 ```
 This function call creates a new folder called TAV_AffectPlots in the current directory I was in, and all of the files are saved in one pdf called 6008BECNR_all_plots_w_affect.pdf. This file is also uploaded in the test_files folder for reference.
+
+The plotting functions were written so that they could be called within these specific entropy functions, but they can also be invocated individually as long as the parameters they require are calculated and inputted separately.
+
+For example,
+```
+plot_counts_w_affect_autonomy(transition_counts, id_number)
+```
+
+The parameters required by these plotting functions are largely intermediate calculations done in the entropy functions, however, so it is recommended to produce these plots by changing the `plots_to_file` or `plot_all` parameters in the entropy functions.
+
 
 Observation Coding Tools
 ------------------
