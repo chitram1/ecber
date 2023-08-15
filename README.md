@@ -119,9 +119,42 @@ SubjectID CanEstimateEntropy EntropyRate TotalNumberOfTransitions
 Now that we have increased the missing threshold to a value greater than the percent missing in the file, showing the first few columns of output, we see that we are now able to estimate the entropy value.
 
 ```
-ber_analyze_file_affect('6008BECNR.xlsx', missing_threshold = 0.15)
+ber_analyze_file_affect('6008BECNR.xlsx', missing_threshold = 0.15) -->
+
+SubjectID CanEstimateEntropy EntropyRate TotalNumberOfTransitions
+6008BECNR               TRUE    1.071117                      246
+
+CombinedVideoDuration PercentMissing
+300.126                    0.1078447             
 ```
-Now that we have included affect as a sensory signal and are finding all possible combinations of states including the total count, total time, and average time for each of these collections, the final output of these functions will be a data frame of 1 row and 96 columns. 
+Now that we have included affect as a sensory signal and are finding all possible combinations of states including the total count, total time, and average time for each of these collections, the final output of these functions will be a data frame of 1 row and 96 columns. We show the first 6 columns above.
+
+Lastly, our final function incorporates the autonomy granting sensory signals with the affect sensory signals.
+```
+ber_analyze_file_affect_and_autonomy('6008BECNR.xlsx', missing_threshold = 0.15) -->
+
+SubjectID CanEstimateEntropy EntropyRate TotalNumberOfTransitions
+6008BECNR               TRUE    1.360337                      91
+
+CombinedVideoDuration PercentMissing
+300.126                    	0.1078447             
+```
+
+We are finding all pairs of the 6 sensory signals, finding the unique pairs between affect signals and autonomy granting signals. This gives us 9 pairs, and since we also count the occurrence of these signals alone, we get 15 total occurrence states that we find the count, total time, and average time for. Therefore, we are expecting 51 total columns when including the additional information that is produced in the output data frame. 
+
+**Plotting Functions**
+The original ccber has the following plotting functions: `plot_counts`, `plot_files`, and `plot_orig`, `plot_sequence`, `plot_transformed`, and `plot_transitions`. Our package expands upon these functions by including the additional co-occurrences with the new sensory signals that we added in the entropy functions to provide further information about the transitions.
+
+- `plot_counts_w_affect`, `plot_files_w_affect`, and `plot_orig_w_affect`, `plot_sequence_w_affect`, `plot_transformed_w_affect`, and `plot_transitions_w_affect`
+  
+- `plot_counts_w_affect_autonomy`, `plot_files_w_affect_autonomy`, and `plot_orig_w_affect_autonomy`, `plot_sequence_w_affect_autonomy`, `plot_transformed_w_affect_autonomy`, and `plot_transitions_w_affect_autonomy`
+
+You can call all of these functions while finding the entropy in the ber_analyze_file functions by setting parameters `plot_all = T` and `plots_to_file = T`. The `plot_all` parameter will display the plots in the plot window in R studio, but it needs to be large enough in order for the plots to render. If you get the following error [Error in plot.new() : figure margins too large], you will need to expand the window size. `plots_to_file` saves all of the 6 plots into a single pdf in a folder named after the specific entropy function you are calling in your current directory.
+
+```
+ber_analyze_file_affect('6008BECNR.xlsx', missing_threshold = 0.15, plots_to_file = T)
+```
+This function call creates a new folder called TAV_AffectPlots in the current directory I was in, and all of the files are saved in one pdf called 6008BECNR_all_plots_w_affect.pdf. This file is also uploaded in the test_files folder for reference.
 
 Observation Coding Tools
 ------------------
