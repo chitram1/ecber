@@ -203,15 +203,34 @@ eventlist <- list(
   c("AutonomySupport","Neither","Intrusiveness","CantTellBehavior")
 )
 
-tolerance_0 = createToleranceMatrix(filepath1 = '6008BECEU_t.xlsx', filepath2 = '6008BECNR_t.xlsx', eventlist = eventlist, tolerance = 0, file_seconds = 300)
+tolerance_0 = createToleranceMatrix(filepath1 = '6008BECEU.xlsx', filepath2 = '6008BECNR.xlsx', eventlist = eventlist, tolerance = 0, file_seconds = 300)
 
-tolerance_1 = createToleranceMatrix(filepath1 = '6008BECEU_t.xlsx', filepath2 = '6008BECNR_t.xlsx', eventlist = eventlist, tolerance = 1, file_seconds = 300)
+tolerance_1 = createToleranceMatrix(filepath1 = '6008BECEU.xlsx', filepath2 = '6008BECNR.xlsx', eventlist = eventlist, tolerance = 1, file_seconds = 300)
 
 #tolerance_0$percent_agreement_raw is equal to 89.23582
 #tolerance_1$percent_agreement_raw is equal to 93.93792
 ```
 
 As the tolerance increases, the percent agreement increases since we are more lenient in what we consider to be equal recorded codes. When the tolerance is 0 (the default value for the tolerance parameter), both coders need to have recorded the exact same signal at the exact same time. If the codes are off by 1 second, they won't be recorded unless we use a tolerance of 1.
+
+**Kappa Calculations**
+We also have functions for calculating Cohen's omnibus kappa, percent agreement, percent by chance, weighted kappa, unweighted kappa standard error, and weighted kappa standard error. These metrics are useful for research projects where we have codes or ratings of behaviors. Using the kappa value, we can gauge inter-observer agreement. The kappa metric is useful since it corrects for percent chance.
+
+These are the two functions we use: `createToleranceAndKappaValsFromMatrix(output_matrix)` and `createToleranceAndKappaValsFromFiles(filepath1, filepath2, tolerance, file_seconds)`.
+
+The only difference between the two functions is that the first function only takes in the confusion matrix of the two files which is an intermediate step calculated in the second function. Both functions output the same data frame as shown below:
+
+```
+createToleranceAndKappaValsFromFiles('6008BECEU.xlsx', '6008BECNR.xlsx', 0, 300)
+
+CohensOmnibusKappa PercentAgreement PercentByChance
+         0.8726312        0.8913865       0.1472518
+weightedKappa kappaUnweightedStdError
+    0.9632845              0.01206674
+kappaWeightedStdError
+          0.003878426
+```
+
 
 Integrating BORIS with ecber
 ------------------
