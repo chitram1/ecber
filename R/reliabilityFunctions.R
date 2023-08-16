@@ -379,8 +379,8 @@ createEventLog <- function(comparisonDf_file1,comparisonDf_file2,tol,filepath){
   
 }
 
-createToleranceAndKappaValsFromFiles <- function(filepath1, filepath2, tolerance, file_seconds = 300) {
-  output <- createToleranceMatrix(filepath1, filepath2, tolerance, file_seconds)
+createToleranceAndKappaValsFromFiles <- function(filepath1, filepath2, eventlist, tolerance, file_seconds = 300) {
+  output <- createToleranceMatrix(filepath1, filepath2, eventlist, tolerance, file_seconds)
   output <- output$confusion_matrix
   return(calcKappaValuesFromMatrix(output))
 }
