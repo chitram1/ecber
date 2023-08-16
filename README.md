@@ -188,11 +188,13 @@ The parameters required by these plotting functions are largely intermediate cal
 Observation Coding Tools
 ------------------
 
-Our package includes functions for comparing 2 coders and finding the similarity in their reports. We include options to increase the tolerance for similarity with a 1, 2, or n-second buffer between both code reports. This allows us to compare reports without having agreement requirements which are too strict. We find the percent agreement by creating a confusion matrix with all the included events that we are looking for, and each entry in the matrix is the amount of seconds that both coders agreed for that pair of events.
+Our package includes functions for comparing 2 coders and finding the similarity in their reports. We include options to increase the tolerance for similarity with a 1, 2, or n-second buffer between both code reports. This allows us to compare reports with additional leniency. We find the percent agreement by creating a confusion matrix with all the included events that we are looking for, and each entry in the matrix is the amount of seconds that both coders agreed for that pair of events.
 
 Relevant functions we will be using for calculating reliability values include:
-1. `createToleranceMatrix(filepath1, filepath2, eventlist, tolerance = 0, file_seconds = 300)`
-
+1. `createToleranceMatrix(filepath1, filepath2, eventlist, tolerance, file_seconds = 300)`
+2. `buildMatrix(filepath1, filepath2, eventlist, file_seconds)` --> this function calculates the percent agreement and confusion matrix for a fixed tolerance value of 0
+3. `createToleranceAndKappaValsFromMatrix(output_matrix)` --> this function takes in the confusion matrix and returns a data frame of the percent agreement, percent by chance, along with kappa values
+4. `createToleranceAndKappaValsFromFiles(filepath1, filepath2, tolerance, file_seconds)` --> this function does the same as the above function except that it takes in the excel file paths of both coders and the desired tolerance value for the confusion matrix
 
 ```
 eventlist <- list(
