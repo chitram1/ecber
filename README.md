@@ -194,7 +194,7 @@ Relevant functions we will be using for calculating reliability values include:
 1. `createToleranceMatrix(filepath1, filepath2, eventlist, tolerance, file_seconds = 300)`
 2. `buildMatrix(filepath1, filepath2, eventlist, file_seconds)` --> this function calculates the percent agreement and confusion matrix for a fixed tolerance value of 0
 3. `createToleranceAndKappaValsFromMatrix(output_matrix)` --> this function takes in the confusion matrix and returns a data frame of the percent agreement, percent by chance, along with kappa values
-4. `createToleranceAndKappaValsFromFiles(filepath1, filepath2, tolerance, file_seconds)` --> this function does the same as the above function except that it takes in the excel file paths of both coders and the desired tolerance value for the confusion matrix
+4. `createToleranceAndKappaValsFromFiles(filepath1, filepath2, eventlist, tolerance, file_seconds)` --> this function does the same as the above function except that it takes in the excel file paths of both coders and the desired tolerance value for the confusion matrix
 
 ```
 eventlist <- list(
@@ -216,12 +216,17 @@ As the tolerance increases, the percent agreement increases since we are more le
 **Kappa Calculations**
 We also have functions for calculating Cohen's omnibus kappa, percent agreement, percent by chance, weighted kappa, unweighted kappa standard error, and weighted kappa standard error. These metrics are useful for research projects where we have codes or ratings of behaviors. Using the kappa value, we can gauge inter-observer agreement. The kappa metric is useful since it corrects for percent chance.
 
-These are the two functions we use: `createToleranceAndKappaValsFromMatrix(output_matrix)` and `createToleranceAndKappaValsFromFiles(filepath1, filepath2, tolerance, file_seconds)`.
+These are the two functions we use: `createToleranceAndKappaValsFromMatrix(output_matrix)` and `createToleranceAndKappaValsFromFiles(filepath1, filepath2, eventlist, tolerance, file_seconds)`.
 
-The only difference between the two functions is that the first function only takes in the confusion matrix of the two files which is an intermediate step calculated in the second function. Both functions output the same data frame as shown below:
+The only difference between the two functions is that the first function only takes in the confusion matrix of the two files which is an intermediate step calculated in the second function. Both functions output the same data frame as shown in the example below. Suppose the eventlist is the same as was defined previously.
 
 ```
-createToleranceAndKappaValsFromFiles('6008BECEU.xlsx', '6008BECNR.xlsx', 0, 300)
+eventlist <- list(
+  c("LookAtMomActivity","NotLookAtMomActivity","CantTellLooking"),
+  c("positive","neutral","negative","CantTellAffect"),
+  c("AutonomySupport","Neither","Intrusiveness","CantTellBehavior")
+)
+createToleranceAndKappaValsFromFiles('6008BECEU.xlsx', '6008BECNR.xlsx', eventlist, 0, 300)
 
 CohensOmnibusKappa PercentAgreement PercentByChance
          0.8726312        0.8913865       0.1472518
@@ -230,6 +235,7 @@ weightedKappa kappaUnweightedStdError
 kappaWeightedStdError
           0.003878426
 ```
+
 
 
 Integrating BORIS with ecber
