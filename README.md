@@ -214,6 +214,7 @@ tolerance_1 = createToleranceMatrix(filepath1 = '6008BECEU.xlsx', filepath2 = '6
 As the tolerance increases, the percent agreement increases since we are more lenient in what we consider to be equal recorded codes. When the tolerance is 0 (the default value for the tolerance parameter), both coders need to have recorded the exact same signal at the exact same time. If the codes are off by 1 second, they won't be recorded unless we use a tolerance of 1.
 
 **Kappa Calculations**
+
 We also have functions for calculating Cohen's omnibus kappa, percent agreement, percent by chance, weighted kappa, unweighted kappa standard error, and weighted kappa standard error. These metrics are useful for research projects where we have codes or ratings of behaviors. Using the kappa value, we can gauge inter-observer agreement. The kappa metric is useful since it corrects for percent chance.
 
 These are the two functions we use: `createToleranceAndKappaValsFromMatrix(output_matrix)` and `createToleranceAndKappaValsFromFiles(filepath1, filepath2, eventlist, tolerance, file_seconds)`.
@@ -236,9 +237,39 @@ kappaWeightedStdError
           0.003878426
 ```
 
+In order to save the output of the reliability functions, we have a function that saves out all the percent agreement, percent by chance, and kappa values into an excel file.
+
+1. `createReliabilityExcel(save_dir, filename1, filename2, eventlist, file_seconds)` --> saves out the values for fixed tolerance values of 0 and 1
+2. `createReliabilityExcel2(save_dir, save_as_fname, filename1, filename2, eventlist, tolerance = c(0,1), file_seconds)` --> saves out the values for tolerance values that you can customize in a vector input
 
 
 Integrating BORIS with ecber
 ------------------
 
-If you have any questions regarding the package, please email us at eugarte@ucdavis.edu or cmukherjee@ucdavis.edu.
+We acknowledge BORIS (Behavioral Observation Research Interactive Software) for providing the coding capabilities for our observers and research project. 
+
+We have functions which enable us to take a directory of CSV files straight from BORIS output, and create new ecber compatible files. This is done with the `ConvertCSVtoEXCEL(csv_dir)` function which requires as input the path to the directory containing the CSVs. We also have a function `Boris2NoldusFileReShape(csv_file)` which will convert a single csv file into the corresponding data frame that ecber requires. It is not saved out to an excel, so this function would be helpful to use as an intermediate helper function to directly see what ecber compatible dataframes look like.
+
+`Boris2NoldusFileReShape(csv_file)` requires the csv_file to be read into with read.csv().
+
+```
+Boris2NoldusFileReShape(read.csv('6008BECNR.csv'))
+
+Time_Relative_sf Duration_sf Observation Behavior       Event…¹
+              <dbl>       <dbl> <chr>       <chr>          <chr>  
+ 1             0         300.   6008BECNR   NotHoldingBaby State …
+ 2             0          61.4  6008BECNR   NoObjectInHand State …
+ 3             0          60.8  6008BECNR   NotLookAtMomA… State …
+ 4             0           0    6008BECNR   Start          State …
+ 5             0           3.42 6008BECNR   positive       State …
+ 6             0           9.51 6008BECNR   Neither        State …
+ 7             3.42        0    6008BECNR   positive       State …
+ 8             3.42        1.09 6008BECNR   neutral        State …
+ 9             3.65        0    6008BECNR   Vocal          State …
+10             4.51        0    6008BECNR   neutral        State …
+
+```
+
+The output above is cut-off, but this is what the function output would look like if called in the R console.
+
+Thank you for your interest in ccber and ecber! If you have any questions regarding the package, please email us at eugarte@ucdavis.edu or cmukherjee@ucdavis.edu.
