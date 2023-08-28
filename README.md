@@ -6,7 +6,7 @@ ecber is an R package developed to estimate behavioral entropy rate and assess c
 Acknowledgements
 ------------------
 
-**ecber** builds upon the foundation laid by the **ccber** package developed for the Conte Center at the University of California Irvine. Our package extends the capabilities of **ccber** by integrating new functions and features. The main Markov matrix calculations, among other key functions, remain unchanged from **ccber**. For more details on these functions and their functionalities, please refer to the original **ccber** repository: ccber on GitHub: https://github.com/bvegetabile/ccber/blob/master/README.md.
+**ecber** builds upon the foundation laid by the **ccber** package developed for the Conte Center at the University of California Irvine. Our package extends the capabilities of **ccber** by integrating new functions and features. The main Markov matrix calculations, among other key functions, remain unchanged from **ccber**. For more details on these functions and their functionalities, please refer to the original **ccber** repository: ccber on [GitHub](https://pages.github.com/). 
 
 Please see the below references:
 
