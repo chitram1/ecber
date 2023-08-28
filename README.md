@@ -19,9 +19,10 @@ What is ecber?
 ------------------
 The primary goal of **ecber** is to estimate the behavioral entropy rate by analyzing event-coded data files or directories of files. This estimation provides insights into the complexity and unpredictability of behavioral sequences. Notably, **ecber** expands upon the capabilities of the original ccber package by introducing additional event codes and functions that enhance the calculation of reliability (similarity) between two coders' annotations, among other features.
 
+
 Key Features and Enhancements
 ------------------
-- **Affect and Behavior Integration**: **ecber** incorporates affect and autonomy-granting behaviors in addition to **ccber’s** sensory signals. This addition enables a deeper analysis of the interplay between affective states, behavior, and sensory signals. The package currently calculates behavioral entropy rate of (1) sensory signals, (2) sensory signals and affect, and (3) affect and autonomy-granting behaviors. See the codebook for a description of how to set up files and record observations [INSERT LINK].
+- **Affect and Behavior Integration**: **ecber** incorporates affect and autonomy-granting behaviors in addition to **ccber’s** sensory signals. This addition enables a deeper analysis of the interplay between affective states, behavior, and sensory signals. The package currently calculates behavioral entropy rate of (1) sensory signals, (2) sensory signals and affect, and (3) affect and autonomy-granting behaviors. See the codebook for a description of how to set up files and record observations: [code book](https://github.com/chitram1/ecber/blob/main/_U%20Denver%20Sensory%20Coding%20and%20A%26B%20Manual-%20Boris.pdf).
 - **Adjustable Markov Matrix Lag**: Users can manually change the Markov matrix lag (Markov model order) in the entropy rate calculation. This adaptation allows for considering different numbers of previous states when predicting the new state.
 - **Co-occurrence states**: We've introduced additional pairwise counts to quantify co-ocurrence for all combinations of behavioral types.
 - **Plotting Enhancements**: **ecber** includes new plotting functions that visualize transition count matrices and transitions between states and can be saved into PDFs. These visualizations aid in comprehending the dynamics of behavioral sequences. 
