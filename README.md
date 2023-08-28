@@ -1,31 +1,36 @@
-ecber: an expansion of the ccber `R` Package used for the HERD Lab at UC Davis 
+ecber: Enhanced Behavioral Entropy Rate Estimation and Reliability Assessment
 ============================================================================================================
-ccber was developed for the Conte Center @ UCI and ecber was edited by Dr. Elisa Ugarte and Chitra Mukherjee from UC Davis.
-
-The goal of this package is to estimate the behavioral entropy rate, and our package includes additional features such as 
-increasing the tolerance values (including a buffer of 1, 2, 3, seconds etc.) for calculating the reliability (similarity) between two coders.
+ecber is an R package developed to estimate behavioral entropy rate and assess coding reliability between two coders. **Building upon the foundation of the original ccber package**, our enhanced version introduces new features to improve the accuracy and flexibility of behavioral entropy rate estimation. **ecber** was created by Dr. Elisa Ugarte and Chitra Mukherjee at the University of California, Davis. 
 
 
 Acknowledgements
 ------------------
 
-Our package is based off of the code written in the ccber repo: (https://github.com/bvegetabile/ccber/blob/master/README.md). We used the entropy rate code as a foundation and expanded upon the capabilities with additional functions and features. Many of the functions used to calculate the entroppy rate use ccber's unchanged functions including the main markov matrix calculations. Please refer to ccber to see the original functions and the explanations included for their functionality.
+**ecber** builds upon the foundation laid by the **ccber** package developed for the Conte Center at the University of California Irvine. Our package extends the capabilities of **ccber** by integrating new functions and features. The main Markov matrix calculations, among other key functions, remain unchanged from **ccber**. For more details on these functions and their functionalities, please refer to the original **ccber** repository: ccber on GitHub: https://github.com/bvegetabile/ccber/blob/master/README.md.
 
-ccber's package includes:
-- markov matrix functions for first, second, and n-order markov models in order to calculate entropy rate
-- creating transition count matrixes for the number of transitions between states
-- entropy rate calculation functions from event coded data files or directory of files
-- plotting functions to display transition count matrices and transitions between sensory signal states (the main sensory signals between auditory, visual, and tactile)
-  
-ecber's package additions:
-- adding affect to sensory signals 
--   additional pairwise counts for all behavioral type combinations when adding affect and autonomy granting
--   new plotting functions to display additional pairwise counts
--   reliability functions which calculate the duration agreement between coders for sensory signal codes
--   increased tolerance of 1+ seconds between events when calculating reliability of two different coder files
--   kappa value correlation calculation functions
--   conversion functions for individual files and directories from BORIS file format to excel files
--   option to increase markov matrix lag (markov model order) when calculating entropy; this increases the number of previous states that are used for the new state prediction
+Please see the below references:
+
+- Vegetabile, B. G., Stout-Oswald, S. A., Davis, E. P., Baram, T. Z., & Stern, H. S. (2019). Estimating the Entropy Rate of Finite Markov Chains With Application to Behavior Studies. Journal of Educational and Behavioral Statistics, 44(3), 282–308. https://doi.org/10/gjqwr3
+
+- Davis, E. P., Stout, S. A., Molet, J., Vegetabile, B., Glynn, L. M., Sandman, C. A., Heins, K., Stern, H., & Baram, T. Z. (2017). Exposure to unpredictable maternal sensory signals influences cognitive development across species. Proceedings of the National Academy of Sciences, 114(39), 10390–10395. https://doi.org/10/gb44vr
+
+
+What is ecber?
+------------------
+The primary goal of **ecber** is to estimate the behavioral entropy rate by analyzing event-coded data files or directories of files. This estimation provides insights into the complexity and unpredictability of behavioral sequences. Notably, **ecber** expands upon the capabilities of the original ccber package by introducing additional event codes and functions that enhance the calculation of reliability (similarity) between two coders' annotations, among other features.
+
+Key Features and Enhancements
+------------------
+- **Affect and Behavior Integration**: **ecber** incorporates affect and autonomy-granting behaviors in addition to **ccber’s** sensory signals. This addition enables a deeper analysis of the interplay between affective states, behavior, and sensory signals. The package currently calculates behavioral entropy rate of (1) sensory signals, (2) sensory signals and affect, and (3) affect and autonomy-granting behaviors. See the codebook for a description of how to set up files and record observations [INSERT LINK].
+- **Adjustable Markov Matrix Lag**: Users can manually change the Markov matrix lag (Markov model order) in the entropy rate calculation. This adaptation allows for considering different numbers of previous states when predicting the new state.
+- **Co-occurrence states**: We've introduced additional pairwise counts to quantify co-ocurrence for all combinations of behavioral types.
+- **Plotting Enhancements**: **ecber** includes new plotting functions that visualize transition count matrices and transitions between states and can be saved into PDFs. These visualizations aid in comprehending the dynamics of behavioral sequences. 
+- **Reliability function**: **ecber** includes reliability functions that calculate the duration agreement between coders for sensory signal codes
+- **Kappa Values**: The package offers functions to calculate kappa value, providing a quantitative measure of agreement between coders.
+- **Expanded Tolerance Values**: **ecber** allows for increased tolerance values, including adjustable buffers (e.g., 1, 2, 3 seconds) to calculate reliability between coders. 
+- **BORIS File Format Conversion**: Conversion functions are included to transform individual files and directories from the BORIS [ADD LINK] file format to Excel files that can be read by **ecber**, streamlining data preprocessing.
+
+
 
 Installation Instructions
 ------------------
@@ -45,18 +50,22 @@ Now that the package has been installed, we need to load it in with the library(
 library('ecber')
 ```
 
-Although the necessary packages are installed within the R files written for this package, if you get errors when using the functions, they may be because some packages need to be loaded in again. If this is the case, please install the following packages as a precaution:
-1. tidyr
-2. dplyr
-3. vcd
-4. readxl
-5. writexl
-6. tidyverse
+While the R files within this package include the required packages, you might encounter errors when using the functions. In such instances, it's possible that certain packages need to be reloaded. If this situation arises, we recommend installing the following packages as a precaution:
+- tidyr
+- dplyr
+- vcd
+- readxl
+- writexl
+- tidyverse
+
     
 Example: Working With an Input File
 ------------------
 
-ecber requires a certain form of Input File in order to use the functions and get the expected output. The input file comes from BORIS which outputs a CSV file. Included below are the first few lines of a CSV file from BORIS. Using the `ConvertCSVtoEXCEL` function, we convert this input file into the expected excel format. This file is included as a test file: 6008BECNR.csv
+For ecber to function correctly and produce the expected output, it requires a specific format of input file. This input file is generated using BORIS video coding software. You can find more information about BORIS [here INSERT LINK]. The output from BORIS is in the form of a CSV file.
+
+Below are the initial lines of a sample CSV file from BORIS:
+
 
 ```
 Observation id,Observation date,Description,Media file,Total length,FPS,Start time,Stop time,Duration,Test status,Subject,Behavior,Behavioral category,Modifiers,Behavior type,Start (s),Stop (s),Duration (s),Comment start,Comment stop
@@ -64,9 +73,18 @@ Observation id,Observation date,Description,Media file,Total length,FPS,Start ti
 6008BECNR,2021-12-06 13:26:24,,T:/Unpredictability Video Coding Project/Montreal Videos/6008.mp4,1381.010,29.97,2000-01-01T00:00:00,2000-01-01T00:00:00,,,No focal subject,NoObjectInHand,Mom Manipulation,,STATE,689.000,750.421,61.421,,
 ```
 
-There can be many different column names, but the required ones for the conversion function include Observation.id, Start..s., Stop..s., Duration..s., Behavioral.category, Behavior, Behavior.type.
+To convert this input file into the expected Excel format, we provide the `ConvertCSVtoEXCEL function`. As an illustration, we've included a test file named **6008BECNR.csv**.
 
-The output of the CSV conversion function will be in a new directory called ConvertedToExcels. An example of what the excel file looks like is shown below. This excel file is also included as a test file: 6008BECNR.xlsx
+While the column names in the CSV file can vary, the conversion function requires specific columns including:
+- Observation id: Name of the file with the encodings -- in the above case, the observation id is 6008BECNR.
+- Start: Stands for the starting time in seconds for a given code, where start is 0.
+- Stop: Stands for the stop time in seconds for a given code.
+- Duration: Duration (in seconds) between the start and stop time for any given code.
+- Behavioral category
+- Behavior: Event and duration codes.
+- Behavior type: Type of code (state/point).
+  
+The output of the CSV conversion function will be saved in a new directory named `ConvertedToExcels`. An example of the resulting Excel file is provided as a test file named **6008BECNR.xlsx**. This Excel file showcases the format after conversion.
 
 ```
 Time_Relative_sf Duration_sf Observation Behavior Event_Type	
@@ -77,16 +95,13 @@ Time_Relative_sf Duration_sf Observation Behavior Event_Type
 0	3.419	6008BECNR	positive	State start	
 ```
 
-- The observation ID is the name of the file with the encodings -- in the above case, the observation id is 6008BECNR. - The Start..s. stands for the starting time, and Stop..s. stands for the stopping time, both of which are in seconds. - The Duration..s. is the duration of seconds between the start and stop time.
-- Behavioral.category and Behavior will be one of the event code states.
-- Behavior.type indicates whether or not it is a point or state event.
-
 All of the functions for calculating entropy, reliability, and kappa values take in excel files as formatted above.
+
 
 Calculating Entropy Rate
 ------------------
 
-The function `ber_analyze_file` calculates the entropy rate from an input excel file which has gone through the file conversion function described in the previous section. For additional in-depth detail about the parameters and output of this function, please refer to ccber's SDD folder and their README file. 
+The function `ber_analyze_file` calculates the entropy rate from an input Excel file that either (1) has gone through the file conversion function described in the previous section or (2) is exported by Noldus Observer. For additional in-depth detail about the parameters and output of this function, please refer to **ccber's** SDD folder and their README file. 
 
 - `f_loc` file location
 - `plot_all` logical: Plot the data to observe the sequence of behaviors
@@ -95,7 +110,7 @@ The function `ber_analyze_file` calculates the entropy rate from an input excel 
 - `auditory_padding` right padding adjustment to auditory events
 - `behavior_types` dictionary of behavior types.  The required sections will depend on the type of entropy function this is. For example, if we are just using the following 3 sensory signals (tactile, auditory, and visual), the following are required: mom_auditory_types, mom_tactile_types, mom_visual_types, baby_visual_types, missing_types
 - `missing_threshold` proportion of acceptable missing time
-- `order` markov model order value for how many states we go back in order to predict the subsequent state. This value always defaults to 1, and this means that each subsequent state depends directly on the preceding state.
+- `order` Markov model order value for how many states we go back in order to predict the subsequent state. This value always defaults to 1, and this means that each subsequent state depends directly on the preceding state.
 
 ```
 ber_analyze_file('6008BECNR_t.xlsx', missing_threshold = 0.15, order = 1) --> The entropy is 0.4789043
@@ -104,21 +119,22 @@ ber_analyze_file('6008BECNR_t.xlsx', missing_threshold = 0.15, order = 2) --> Th
 ```
 As the order parameter increases, the entropy value decreases. This is because we have a larger gap between the states for predicting future states in the markov model and we lose information.
 
-Our package expands upon this function by incorporating new behavior signals which include Affect and Autonomy Granting, each of which containing actions/behaviors that fall within this category. We have additional functions to include affect and autonomy granting: `ber_analyze_file_affect`, `ber_analyze_file_affect_and_autonomy`.
+Our package builds upon the existing function by introducing novel behavior signals encompassing **affect** and **autonomy-granting behaviors**. These new signals encompass a range of actions and behaviors relevant to their respective categories. To facilitate the analysis of these signals, we've introduced additional functions:  `ber_analyze_file_affect`, `ber_analyze_file_affect_and_autonomy`.
 
-Originally, we have 3 sensory signals: Tactile, Auditory, and Visual. We have added affect and autonomy granting.
+Originally, the package incorporated three sensory signals: Tactile, Auditory, and Visual. With our expansion, we've seamlessly integrated **affect** and **autonomy-granting behaviors**.
 
-For Affect, we have the following sensory signals:
-1. Positive
-2. Negative
-3. Neutral
+For Affect, the following signals are included:
+- Positive
+- Negative
+- Neutral
 
-For Autonomy Granting, we have the following sensory signals:
-1. Autonomy Support
-2. Intrusiveness
-3. Neither
+Similarly, for Autonomy Granting, the following signals are integrated:
+- Autonomy Support
+- Intrusiveness
+- Neither
 
-These functions behave in the same manner as `ber_analyze_file` except that they take in addional behavior types which we will use to create new co-occurrence states. 
+
+These new functions operate in a similar fashion to `ber_analyze_file` but they accept additional behavior types that enable the creation of new co-occurrence states. This enhancement allows for a more nuanced understanding of the interplay between different behavior types, contributing to comprehensive behavior analysis.
 
 ```
 ber_analyze_file('6008BECNR.xlsx') -->
@@ -126,7 +142,7 @@ ber_analyze_file('6008BECNR.xlsx') -->
 SubjectID CanEstimateEntropy EntropyRate CombinedVideoDuration PercentMissing
 6008BECNR              FALSE         NA                 300.126     0.1228284
 ```
-In the above example, the percent missing threshold is higher than the default missing value of 0.1 so we are unable to calculate the entropy rate for the file.
+In the above example, the percent missing threshold is higher than the default missing value of 0.1 (10% of the data) so we are unable to calculate the entropy rate for the file.
 
 ```
 ber_analyze_file('6008BECNR.xlsx', missing_threshold = 0.15) -->
@@ -135,7 +151,7 @@ SubjectID CanEstimateEntropy EntropyRate TotalNumberOfTransitions
 6008BECNR               TRUE   0.4789043                      194
 ```
 
-Now that we have increased the missing threshold to a value greater than the percent missing in the file, showing the first few columns of output, we see that we are now able to estimate the entropy value.
+Now that we have increased the missing threshold to a value of 15%, we are now able to estimate the entropy value.
 
 ```
 ber_analyze_file_affect('6008BECNR.xlsx', missing_threshold = 0.15) -->
@@ -146,9 +162,9 @@ SubjectID CanEstimateEntropy EntropyRate TotalNumberOfTransitions
 CombinedVideoDuration PercentMissing
 300.126                    0.1078447             
 ```
-Now that we have included affect as a sensory signal and are finding all possible combinations of states including the total count, total time, and average time for each of these collections, the final output of these functions will be a data frame of 1 row and 96 columns. We show the first 6 columns above.
 
-Lastly, our final function incorporates the autonomy granting sensory signals with the affect sensory signals.
+Lastly, to provide a comprehensive analysis, our final function seamlessly combines autonomy-granting behaviors with affect. This integrated approach further enriches the understanding of the relationships between behavior types, paving the way for more insightful behavioral insights.
+
 ```
 ber_analyze_file_affect_and_autonomy('6008BECNR.xlsx', missing_threshold = 0.15) -->
 
@@ -159,10 +175,31 @@ CombinedVideoDuration PercentMissing
 300.126                    	0.1078447             
 ```
 
-We are finding all pairs of the 6 sensory signals, finding the unique pairs between affect signals and autonomy granting signals. This gives us 9 pairs, and since we also count the occurrence of these signals alone, we get 15 total occurrence states that we find the count, total time, and average time for. Therefore, we are expecting 51 total columns when including the additional information that is produced in the output data frame. 
+**Comprehensive State Combinations and Output.** 
+
+With the integration of affect and the computation of various state combinations, including total counts, total time, and average time for each collection, the output of these functions takes the form of a data frame.
+
+
+Column 1
+Column 2
+Column 3
+Column 4
+Column 5
+Column 6
+Total Count Tactile-Affect-Positive
+Total Time Tactile-Affect-Positive
+Average Time Tactile-Affect-Positive
+Total Count Tactile-Affect-Negative
+Total Time Tactile-Affect-Negative
+Average Time Tactile-Affect-Negative
+
+| Column 1  | Column 2 | Column 3 | Column 4 | Column 5 | Column 6 |
+| ------------- | ------------- | ------------- | ------------- | ------------- | ------------- |
+| Total Count Tactile-Affect-Positive  | Total Time Tactile-Affect-Positive | Average Time Tactile-Affect-Positive | Total Count Tactile-Affect-Negative  | Total Time Tactile-Affect-Negative | Average Time Tactile-Affect-Negative  |
 
 **Plotting Functions**
-The original ccber has the following plotting functions: `plot_counts`, `plot_files`, and `plot_orig`, `plot_sequence`, `plot_transformed`, and `plot_transitions`. Our package expands upon these functions by including the additional co-occurrences with the new sensory signals that we added in the entropy functions to provide further information about the transitions.
+
+The original **ccber** has the following plotting functions: `plot_counts`, `plot_files`, and `plot_orig`, `plot_sequence`, `plot_transformed`, and `plot_transitions`. Our package expands upon these functions by including the additional co-occurrences with the new codes we added to the entropy functions to provide further information about the transitions.
 
 - `plot_counts_w_affect`, `plot_files_w_affect`, and `plot_orig_w_affect`, `plot_sequence_w_affect`, `plot_transformed_w_affect`, and `plot_transitions_w_affect`
   
@@ -173,24 +210,27 @@ You can call all of these functions while finding the entropy in the ber_analyze
 ```
 ber_analyze_file_affect('6008BECNR.xlsx', missing_threshold = 0.15, plots_to_file = T)
 ```
-This function call creates a new folder called TAV_AffectPlots in the current directory I was in, and all of the files are saved in one pdf called 6008BECNR_all_plots_w_affect.pdf. This file is also uploaded in the test_files folder for reference.
 
-The plotting functions were written so that they could be called within these specific entropy functions, but they can also be invocated individually as long as the parameters they require are calculated and inputted separately.
+Upon invoking this function, a new directory named `TAV_AffectPlots` is generated within the current directory. Within this folder, all the generated plot files are consolidated into a single PDF named `6008BECNR_all_plots_w_affect.pdf`. This reference PDF file is conveniently accessible in the `test_files` folder for your convenience.
+
+The plotting functions are thoughtfully designed to operate seamlessly within the context of the specified entropy functions. However, they can also be utilized independently if the necessary parameters are computed and supplied separately.
+
 
 For example,
 ```
 plot_counts_w_affect_autonomy(transition_counts, id_number)
 ```
 
-The parameters required by these plotting functions are largely intermediate calculations done in the entropy functions, however, so it is recommended to produce these plots by changing the `plots_to_file` or `plot_all` parameters in the entropy functions.
+The parameters essential for these plotting functions are primarily derived from intermediate calculations performed within the entropy functions. While these parameters are intricately linked to these calculations, it is advisable to generate the plots by adjusting the `plots_to_file` or `plot_all` parameters within the entropy functions.
 
 
 Observation Coding Tools
 ------------------
 
-Our package includes functions for comparing 2 coders and finding the similarity in their reports. We include options to increase the tolerance for similarity with a 1, 2, or n-second buffer between both code reports. This allows us to compare reports with additional leniency. We find the percent agreement by creating a confusion matrix with all the included events that we are looking for, and each entry in the matrix is the amount of seconds that both coders agreed for that pair of events.
+Our package comprises functions dedicated to comparing reports from two coders and quantifying the similarity between their annotations. To offer flexibility in assessing agreement, we provide options to adjust the tolerance for similarity, allowing for a buffer of 1, 2, or n seconds between the code reports. This adaptive approach enables a comparison with increased leniency.
+To compute the percent agreement, we construct a confusion matrix encompassing all the relevant events of interest. Each cell in the matrix represents the duration (in seconds) for which both coders concurred on that specific pair of events.
 
-Relevant functions we will be using for calculating reliability values include:
+Relevant functions pivotal in computing reliability values encompass:
 1. `createToleranceMatrix(filepath1, filepath2, eventlist, tolerance, file_seconds = 300)`
 2. `buildMatrix(filepath1, filepath2, eventlist, file_seconds)` --> this function calculates the percent agreement and confusion matrix for a fixed tolerance value of 0
 3. `createToleranceAndKappaValsFromMatrix(output_matrix)` --> this function takes in the confusion matrix and returns a data frame of the percent agreement, percent by chance, along with kappa values
@@ -211,7 +251,8 @@ tolerance_1 = createToleranceMatrix(filepath1 = '6008BECEU.xlsx', filepath2 = '6
 #tolerance_1$percent_agreement_raw is equal to 93.93792
 ```
 
-As the tolerance increases, the percent agreement increases since we are more lenient in what we consider to be equal recorded codes. When the tolerance is 0 (the default value for the tolerance parameter), both coders need to have recorded the exact same signal at the exact same time. If the codes are off by 1 second, they won't be recorded unless we use a tolerance of 1.
+As the tolerance increases, the percent agreement increases since we are more lenient in what we consider to be equal recorded codes. When the tolerance is 0 (the default value for the tolerance parameter), both coders need to have recorded the exact same code at the exact same time. If the codes are off by 1 second, they won't be recorded unless we use a tolerance of 1.
+
 
 **Kappa Calculations**
 
@@ -219,7 +260,7 @@ We also have functions for calculating Cohen's omnibus kappa, percent agreement,
 
 These are the two functions we use: `createToleranceAndKappaValsFromMatrix(output_matrix)` and `createToleranceAndKappaValsFromFiles(filepath1, filepath2, eventlist, tolerance, file_seconds)`.
 
-The only difference between the two functions is that the first function only takes in the confusion matrix of the two files which is an intermediate step calculated in the second function. Both functions output the same data frame as shown in the example below. Suppose the eventlist is the same as was defined previously.
+The only difference between the two functions is that the first function only takes in the confusion matrix of the two files which is an intermediate step calculated in the second function. Both functions output the same data frame as shown in the example below. Suppose the event list is the same as was defined previously.
 
 ```
 eventlist <- list(
@@ -246,9 +287,13 @@ In order to save the output of the reliability functions, we have a function tha
 Integrating BORIS with ecber
 ------------------
 
-We acknowledge BORIS (Behavioral Observation Research Interactive Software) for providing the coding capabilities for our observers and research project. 
+Video coding for this project was done in BORIS (Behavioral Observation Research Interactive Software). BORIS is an easy-to-use event-logging software for video/audio coding and live observations. BORIS is also a **free and open-source software** available for GNU/Linux, Windows, and MacOS. For more information, go to the BORIS official website and the following paper:
 
-We have functions which enable us to take a directory of CSV files straight from BORIS output, and create new ecber compatible files. This is done with the `ConvertCSVtoEXCEL(csv_dir)` function which requires as input the path to the directory containing the CSVs. We also have a function `Boris2NoldusFileReShape(csv_file)` which will convert a single csv file into the corresponding data frame that ecber requires. It is not saved out to an excel, so this function would be helpful to use as an intermediate helper function to directly see what ecber compatible dataframes look like.
+Friard, O., & Gamba, M. (2016). BORIS: a free, versatile open‐source event‐logging software for video/audio coding and live observations. Methods in ecology and evolution, 7(11), 1325-1330.
+
+Our package equips you with the ability to seamlessly transform a directory of CSV files derived from BORIS output into **ecber** compatible files. This task is achieved by utilizing the `ConvertCSVtoEXCEL(csv_dir)` function. Simply provide the path to the directory containing the CSV files as input, and this function generates new files compatible with **ecber's** data format.
+
+Additionally, we offer the `Boris2NoldusFileReShape(csv_file)` function, designed to convert an individual CSV file into a corresponding data frame that aligns with **ecber's** requirements. Unlike the previous function, this one doesn't save the output to an Excel file. Instead, it serves as a valuable intermediate tool, enabling you to visualize the structure of **ecber** compatible data frames directly.
 
 `Boris2NoldusFileReShape(csv_file)` requires the csv_file to be read into with read.csv().
 
@@ -272,4 +317,4 @@ Time_Relative_sf Duration_sf Observation Behavior       Event…¹
 
 The output above is cut-off, but this is what the function output would look like if called in the R console.
 
-Thank you for your interest in ccber and ecber! If you have any questions regarding the package, please email us at eugarte@ucdavis.edu or cmukherjee@ucdavis.edu.
+**Thank you for your interest in ccber and ecber! If you have any questions regarding the package, please email us at eugarte@ucdavis.edu or cmukherjee@ucdavis.edu.**
