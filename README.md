@@ -117,7 +117,7 @@ behavior_types=list("mom_auditory_types" = c('Vocal'),
                     "negative" = c('negative'),
                     "neutral" = c('neutral'),
                     "missing_types" = c('CantTellHolding', 'ActivityNotVisible',
-                                         'CantTellLooking', 'CantTellAffect')),
+                                         'CantTellLooking', 'CantTellAffect'))
 ```
 
 - `f_loc` file location
