@@ -1,6 +1,6 @@
-ecber: Enhanced Behavioral Entropy Rate Estimation and Reliability Assessment
+ecber: Expansion of ccber's Behavioral Entropy Rate Estimation and Reliability Assessment
 ============================================================================================================
-ecber is an R package developed to estimate behavioral entropy rate and assess coding reliability between two coders. **Building upon the foundation of the original ccber package**, our enhanced version introduces new features to improve the accuracy and flexibility of behavioral entropy rate estimation. **ecber** was created by Dr. Elisa Ugarte and Chitra Mukherjee at the University of California, Davis. 
+ecber is an R package developed to estimate behavioral entropy rate and assess coding reliability between two coders. **Building upon the foundation of the original ccber package**, our expanded version introduces new features to improve the accuracy and flexibility of behavioral entropy rate estimation. **ecber** was created by Dr. Elisa Ugarte and Chitra Mukherjee at the University of California, Davis. 
 
 
 Acknowledgements
@@ -17,7 +17,7 @@ Please see the below references:
 
 What is ecber?
 ------------------
-The primary goal of **ecber** is to estimate the behavioral entropy rate by analyzing event-coded data files or directories of files. This estimation provides insights into the complexity and unpredictability of behavioral sequences. Notably, **ecber** expands upon the capabilities of the original ccber package by introducing additional event codes and functions that enhance the calculation of reliability (similarity) between two coders' annotations, among other features.
+The primary goal of **ecber** is to estimate the behavioral entropy rate by analyzing event-coded data files or directories of files. This estimation provides insights into the complexity and unpredictability of behavioral sequences. Notably, **ecber** expands upon the capabilities of the original ccber package by introducing additional event codes and functions that allow the calculation of reliability (similarity) between two coders' annotations, among other features.
 
 
 Key Features and Enhancements
@@ -135,7 +135,7 @@ Similarly, for Autonomy Granting, the following signals are integrated:
 - Neither
 
 
-These new functions operate in a similar fashion to `ber_analyze_file` but they accept additional behavior types that enable the creation of new co-occurrence states. This enhancement allows for a more nuanced understanding of the interplay between different behavior types, contributing to comprehensive behavior analysis.
+These new functions operate in a similar fashion to `ber_analyze_file` but they accept additional behavior types that enable the creation of new co-occurrence states. This expansion allows for a more nuanced understanding of the interplay between different behavior types, contributing to comprehensive behavior analysis.
 
 ```
 ber_analyze_file('6008BECNR.xlsx') -->
