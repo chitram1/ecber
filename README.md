@@ -244,14 +244,6 @@ createToleranceAndKappaValsFromMatrix(tolerance_0) #this function can either tak
 
 As the tolerance increases, the percent agreement increases since we are more lenient in what we consider to be equal recorded codes. When the tolerance is 0 (the default value for the tolerance parameter), both coders need to have recorded the exact same code at the exact same time. If the codes are off by 1 second, they won't be recorded unless we use a tolerance of 1.
 
-Below we provide examples on calling the buildMatrix and createToleranceAndKappaValsFromMatrix.
-
-```
-buildMatrix('6008BECEU.xlsx', '6008BECNR.xlsx', eventlist, 300)
-
-createToleranceAndKappaValsFromMatrix()
-```
-
 **Kappa Calculations**
 
 We also have functions for calculating Cohen's omnibus kappa, percent agreement, percent by chance, weighted kappa, unweighted kappa standard error, and weighted kappa standard error. These metrics are useful for research projects where we have codes or ratings of behaviors. Using the kappa value, we can gauge inter-observer agreement. The kappa metric is useful since it corrects for percent chance.
