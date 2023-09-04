@@ -103,6 +103,26 @@ Calculating Entropy Rate
 
 The function `ber_analyze_file` calculates the entropy rate from an input Excel file that either (1) has gone through the file conversion function described in the previous section or (2) is exported by Noldus Observer. For additional in-depth detail about the parameters and output of this function, please refer to **ccber's** SDD folder and their README file. 
 
+Of Note:
+In the entropy functions above, we have examples with set event codes included. The functions are hardcoded with these written into the variables, but you will be able to generalize the codes based on your research project. However, the behavior list input will require the same number as inputs as the functions have set in the parameter list, but you can change the names to include what your project codes are.
+
+For example, below we have the behavior list as written for our ecber specifications, but you can change the codes as catered to your project:
+
+```
+behavior_types=list("mom_auditory_types" = c('Vocal'),
+                                                        "mom_tactile_types" = c('TouchBaby',
+                                                                                'HoldingBaby'),
+                                                        "mom_visual_types" = c('ManipulatingObject'),
+                                                        "baby_visual_types" = c('LookAtMomActivity'),
+                                                        "positive" = c('positive'),
+                                                        "negative" = c('negative'),
+                                                        "neutral" = c('neutral'),
+                                                        "missing_types" = c('CantTellHolding',
+                                                                            'ActivityNotVisible',
+                                                                            'CantTellLooking',
+                                                                            'CantTellAffect')),
+```
+
 - `f_loc` file location
 - `plot_all` logical: Plot the data to observe the sequence of behaviors
 - `plots_to_file` logical: send all plots to a file
