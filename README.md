@@ -132,6 +132,8 @@ Below is an example of what it could look like with custom codes for 6 categorie
                                                  
 ```
 
+**Function Parameters**
+
 - `f_loc` file location
 - `plot_all` logical: Plot the data to observe the sequence of behaviors
 - `plots_to_file` logical: send all plots to a file
