@@ -176,23 +176,10 @@ CombinedVideoDuration PercentMissing
 300.126                    	0.1078447             
 ```
 
-**Comprehensive State Combinations and Output.** 
+**Comprehensive State Combinations and Output** 
 
 With the integration of affect and the computation of various state combinations, including total counts, total time, and average time for each collection, the output of these functions takes the form of a data frame.
 
-
-Column 1
-Column 2
-Column 3
-Column 4
-Column 5
-Column 6
-Total Count Tactile-Affect-Positive
-Total Time Tactile-Affect-Positive
-Average Time Tactile-Affect-Positive
-Total Count Tactile-Affect-Negative
-Total Time Tactile-Affect-Negative
-Average Time Tactile-Affect-Negative
 
 | Column 1  | Column 2 | Column 3 | Column 4 | Column 5 | Column 6 |
 | ------------- | ------------- | ------------- | ------------- | ------------- | ------------- |
