@@ -74,7 +74,7 @@ Observation id,Observation date,Description,Media file,Total length,FPS,Start ti
 6008BECNR,2021-12-06 13:26:24,,T:/Unpredictability Video Coding Project/Montreal Videos/6008.mp4,1381.010,29.97,2000-01-01T00:00:00,2000-01-01T00:00:00,,,No focal subject,NoObjectInHand,Mom Manipulation,,STATE,689.000,750.421,61.421,,
 ```
 
-To convert this input file into the expected Excel format, we provide the `ConvertCSVtoEXCEL function`. As an illustration, we've included a test file named **6008BECNR.csv**.
+To convert this input file into the expected Excel format, we provide the `ConvertCSVtoEXCEL function`. As an illustration, we've included a test file named **6008BECNR.csv**. See input files [here](https://github.com/chitram1/ecber/tree/main/test_files).
 
 While the column names in the CSV file can vary, the conversion function requires specific columns including:
 - Observation id: Name of the file with the encodings -- in the above case, the observation id is 6008BECNR.
