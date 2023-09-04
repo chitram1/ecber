@@ -103,7 +103,7 @@ Calculating Entropy Rate
 
 The function `ber_analyze_file` calculates the entropy rate from an input Excel file that either (1) has gone through the file conversion function described in the previous section or (2) is exported by Noldus Observer. For additional in-depth detail about the parameters and output of this function, please refer to **ccber's** SDD folder and their README file. 
 
-Of Note:
+**Of Note:**
 In the entropy functions above, we have examples with set event codes included. The functions are hardcoded with these written into the variables. However, the functions written for affect and autonomy are the most flexible for user defined codes (with a maximum of 6 categories where there is no limit for codes contained in each one). If one of the signals written in our behavior_types list is not in your codebook, such as negative affect, it needs to stay in the list as a placeholder but it won't impact any of the calculations.
 
 Here is the original behavior types list as written in ecber functions.
@@ -119,7 +119,7 @@ Here is the original behavior types list as written in ecber functions.
                                                  
 ```
 
-Below is an example of what it could look like with custom codes for 6 categories ("apple", "orange", "Pascal", "banana", "grape", "lemon", "NotAFruit", 'NotPascal'). If there are fewer than 6 categories in your research project, you can just leave placeholders for that list such as "Intrusiveness", and since that code is not contained in your files, it won't affect any of the resulting calculations.
+Below is an example of what it could look like with custom codes for 6 categories ("apple", "orange", "Pascal", "banana", "grape", "lemon", "NotAFruit", 'NotPascal'). If there are fewer than 6 categories in your research project, you can leave placeholders for that list such as "Intrusiveness", and since that code is not contained in your files, it won't affect any of the resulting calculations.
 
 ```
  behavior_types=list("positive" = c('apple'),
