@@ -26,11 +26,10 @@ Key Features and Enhancements
 - **Adjustable Markov Matrix Lag**: Users can manually change the Markov matrix lag (Markov model order) in the entropy rate calculation. This adaptation allows for considering different numbers of previous states when predicting the new state.
 - **Co-occurrence states**: We've introduced additional pairwise counts to quantify co-ocurrence for all combinations of behavioral types.
 - **Plotting Enhancements**: **ecber** includes new plotting functions that visualize transition count matrices and transitions between states and can be saved into PDFs. These visualizations aid in comprehending the dynamics of behavioral sequences. 
-- **Reliability function**: **ecber** includes reliability functions that calculate the duration agreement between coders for sensory signal codes
-- **Kappa Values**: The package offers functions to calculate kappa value, providing a quantitative measure of agreement between coders.
+- **Reliability function**: **ecber** includes reliability functions designed to measure the level of agreement in duration between different coders. These functions can adapt to custom-defined codes.
+- **Kappa Values**: provides functions for calculating kappa values, which offer a numerical assessment of agreement between coders based on user-defined codes.
 - **Expanded Tolerance Values**: **ecber** allows for increased tolerance values, including adjustable buffers (e.g., 1, 2, 3 seconds) to calculate reliability between coders. 
 - **BORIS File Format Conversion**: Conversion functions are included to transform individual files and directories from the [BORIS](https://www.boris.unito.it/) format to Excel files that can be read by **ecber**, streamlining data preprocessing.
-
 
 
 Installation Instructions
