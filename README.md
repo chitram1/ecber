@@ -63,7 +63,7 @@ While the R files within this package include the required packages, you might e
 Example: Working With an Input File
 ------------------
 
-For ecber to function correctly and produce the expected output, it requires a specific format of input file. This input file is generated using BORIS video coding software. You can find more information about BORIS [here INSERT LINK]. The output from BORIS is in the form of a CSV file.
+For ecber to function correctly and produce the expected output, it requires a specific format of input file. This input file is generated using BORIS video coding software. You can find more information about [BORIS](https://www.boris.unito.it/). The output from BORIS is in the form of a CSV file.
 
 Below are the initial lines of a sample CSV file from BORIS:
 
