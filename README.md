@@ -110,17 +110,14 @@ For example, below we have the behavior list as written for our ecber specificat
 
 ```
 behavior_types=list("mom_auditory_types" = c('Vocal'),
-                                                        "mom_tactile_types" = c('TouchBaby',
-                                                                                'HoldingBaby'),
-                                                        "mom_visual_types" = c('ManipulatingObject'),
-                                                        "baby_visual_types" = c('LookAtMomActivity'),
-                                                        "positive" = c('positive'),
-                                                        "negative" = c('negative'),
-                                                        "neutral" = c('neutral'),
-                                                        "missing_types" = c('CantTellHolding',
-                                                                            'ActivityNotVisible',
-                                                                            'CantTellLooking',
-                                                                            'CantTellAffect')),
+                    "mom_tactile_types" = c('TouchBaby','HoldingBaby'),
+                    "mom_visual_types" = c('ManipulatingObject'),
+                    "baby_visual_types" = c('LookAtMomActivity'),
+                    "positive" = c('positive'),
+                    "negative" = c('negative'),
+                    "neutral" = c('neutral'),
+                    "missing_types" = c('CantTellHolding', 'ActivityNotVisible',
+                                         'CantTellLooking', 'CantTellAffect')),
 ```
 
 - `f_loc` file location
