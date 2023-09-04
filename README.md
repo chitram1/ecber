@@ -232,15 +232,25 @@ eventlist <- list(
 )
 
 tolerance_0 = createToleranceMatrix(filepath1 = '6008BECEU.xlsx', filepath2 = '6008BECNR.xlsx', eventlist = eventlist, tolerance = 0, file_seconds = 300)
+tolerance_0_v2 = buildMatrix('6008BECEU.xlsx', '6008BECNR.xlsx', eventlist, 300) #this is the exact same matrix as tolerance_0 since the buildMatrix is hardcoded for a tolerance of 0
 
 tolerance_1 = createToleranceMatrix(filepath1 = '6008BECEU.xlsx', filepath2 = '6008BECNR.xlsx', eventlist = eventlist, tolerance = 1, file_seconds = 300)
 
 #tolerance_0$percent_agreement_raw is equal to 89.23582
 #tolerance_1$percent_agreement_raw is equal to 93.93792
+
+createToleranceAndKappaValsFromMatrix(tolerance_0) #this function can either take in tolerance_0 or tolerance_1 since both are confusion matrices
 ```
 
 As the tolerance increases, the percent agreement increases since we are more lenient in what we consider to be equal recorded codes. When the tolerance is 0 (the default value for the tolerance parameter), both coders need to have recorded the exact same code at the exact same time. If the codes are off by 1 second, they won't be recorded unless we use a tolerance of 1.
 
+Below we provide examples on calling the buildMatrix and createToleranceAndKappaValsFromMatrix.
+
+```
+buildMatrix('6008BECEU.xlsx', '6008BECNR.xlsx', eventlist, 300)
+
+createToleranceAndKappaValsFromMatrix()
+```
 
 **Kappa Calculations**
 
@@ -271,6 +281,19 @@ In order to save the output of the reliability functions, we have a function tha
 1. `createReliabilityExcel(save_dir, filename1, filename2, eventlist, file_seconds)` --> saves out the values for fixed tolerance values of 0 and 1
 2. `createReliabilityExcel2(save_dir, save_as_fname, filename1, filename2, eventlist, tolerance = c(0,1), file_seconds)` --> saves out the values for tolerance values that you can customize in a vector input
 
+Below we will show an example of using these reliability functions. The eventlist will remain the same throughout all examples and the save_dir is the current directory the user is in which is denoted by ('./').
+
+```
+eventlist <- list(
+  c("LookAtMomActivity","NotLookAtMomActivity","CantTellLooking"),
+  c("positive","neutral","negative","CantTellAffect"),
+  c("AutonomySupport","Neither","Intrusiveness","CantTellBehavior")
+)
+
+createReliabilityExcel('./', '6008BECEU.xlsx', '6008BECNR.xlsx', eventlist, 300)
+
+createReliabilityExcel2('./', 'reliability_tolerance_vals.xlsx', '6008BECEU.xlsx', '6008BECNR.xlsx', eventlist, tolerance = c(0,1,2), 300)
+```
 
 Integrating BORIS with ecber
 ------------------
