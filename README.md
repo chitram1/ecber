@@ -42,7 +42,7 @@ install.packages('devtools', dependencies = TRUE)
 ```
 
 ```{r, echo=TRUE, eval=FALSE}
-devtools::install_github('chitram/ecber')
+devtools::install_github('chitram1/ecber')
 ```
 Now that the package has been installed, we need to load it in with the library() function.
 
