@@ -3,15 +3,15 @@
 
 #add individual kappa values
 if ("vcd" %in% rownames(installed.packages()) == FALSE) {
-  install.packages("vcd")
+  install.packages("vcd", repos = "http://cran.us.r-project.org")
 }
 
 if ("writexl" %in% rownames(installed.packages()) == FALSE) {
-  install.packages("writexl")
+  install.packages("writexl", repos = "http://cran.us.r-project.org")
 }
 
 if ("readxl" %in% rownames(installed.packages()) == FALSE) {
-  install.packages("readxl")
+  install.packages("readxl", repos = "http://cran.us.r-project.org")
 }
 
 library(writexl)
