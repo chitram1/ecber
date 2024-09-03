@@ -57,6 +57,10 @@ While the R files within this package include the required packages, you might e
 - readxl
 - writexl
 - tidyverse
+- intervals
+- DescTools
+- gridExtra
+- openxlsx
 
     
 Example: Working With an Input File
