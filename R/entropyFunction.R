@@ -1537,7 +1537,7 @@ ber_analyze_dir_affect <- function(dir_loc,
                                                        "positive" = c('positive'),
                                                        "negative" = c('negative'),
                                                        "neutral" = c('neutral')),
-                                   missing_threshold = 0.1,
+                                   missing_threshold = 0.1, order = 1,
                                    log_file = paste(Sys.Date(), '-ber-logfile.txt', sep='')){
 
   old_dir <- getwd()
@@ -1603,7 +1603,7 @@ ber_analyze_dir_affect <- function(dir_loc,
                                                            tactile_padding=tactile_padding,
                                                            auditory_padding=auditory_padding,
                                                            behavior_types=behavior_types,
-                                                           missing_threshold=missing_threshold), file=NULL)
+                                                           missing_threshold=missing_threshold, order = order), file=NULL)
 
     if(sum(unlist(file_results$file_checks)) != 6){
       files_to_check <- c(files_to_check, tail(strsplit(individual_file, '/')[[1]], 1))
@@ -1611,7 +1611,7 @@ ber_analyze_dir_affect <- function(dir_loc,
                                                              tactile_padding=tactile_padding,
                                                              auditory_padding=auditory_padding,
                                                              behavior_types=behavior_types,
-                                                             missing_threshold=missing_threshold),
+                                                             missing_threshold=missing_threshold, order = order),
                      file = log_file, append = T)
       resultsDF[i,] <- file_results$estimates
       message(paste('Warning - See log for file : ', tail(strsplit(individual_file, '/')[[1]], 1)))
@@ -2242,7 +2242,7 @@ ber_analyze_dir_affect_and_autonomy <- function(dir_loc,
                                                                     "autonomy_support" = c('AutonomySupport'),
                                                                     "intrusiveness" = c('Intrusiveness'),
                                                                     "neither" = c('Neither')),
-                                                missing_threshold = 0.1,
+                                                missing_threshold = 0.1, order = 1,
                                                 log_file = paste(Sys.Date(), '-ber-logfile.txt', sep='')){
 
   old_dir <- getwd()
@@ -2302,13 +2302,13 @@ ber_analyze_dir_affect_and_autonomy <- function(dir_loc,
     individual_file <- all_files[i]
     capture.output(file_results <- ber_analyze_file_affect_and_autonomy(individual_file,
                                                                         behavior_types=behavior_types,
-                                                                        missing_threshold=missing_threshold), file=NULL)
+                                                                        missing_threshold=missing_threshold, order = order), file=NULL)
 
     if(sum(unlist(file_results$file_checks)) != 6){
       files_to_check <- c(files_to_check, tail(strsplit(individual_file, '/')[[1]], 1))
       capture.output(file_results <- ber_analyze_file_affect_and_autonomy(individual_file,
                                                                           behavior_types=behavior_types,
-                                                                          missing_threshold=missing_threshold),
+                                                                          missing_threshold=missing_threshold, order = order),
                      file = log_file, append = T)
       resultsDF[i,] <- file_results$estimates
       message(paste('Warning - See log for file : ', tail(strsplit(individual_file, '/')[[1]], 1)))
